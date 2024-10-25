@@ -10,7 +10,7 @@ import Copy from './Copy'
 import Transaction from './Transaction'
 
 import { SUPPORTED_WALLETS } from '../../constants'
-import { ReactComponent as Close } from '../../assets/images/x.svg'
+import Close from '../../assets/images/x.svg'
 import { getEtherscanLink } from '../../utils'
 import { injected, walletconnect } from '../../connectors'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
