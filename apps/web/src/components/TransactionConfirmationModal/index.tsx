@@ -9,7 +9,7 @@ import { RowBetween } from '../Row'
 import { AlertTriangle, ArrowUpCircle } from 'react-feather'
 import { ButtonPrimary } from '../Button'
 import { AutoColumn, ColumnCenter } from '../Column'
-import Circle from '../../assets/images/blue-loader.svg'
+import Circle from '../../assets/images/blue-loader.svg?url'
 
 import { getEtherscanLink } from '../../utils'
 import { useActiveWeb3React } from '../../hooks'

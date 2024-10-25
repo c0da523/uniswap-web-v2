@@ -11,7 +11,6 @@
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "start": "vite",
-    "test": "react-scripts test --env=jsdom",
     "serve": "vite preview"
   },
   "browserslist": {

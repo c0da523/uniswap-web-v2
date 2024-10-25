@@ -23,8 +23,10 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
 }
 
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
-
+  let prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
+  if (chainId === 95270009527) {
+    prefix = 'http://35.197.94.19:40080'
+  }
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`

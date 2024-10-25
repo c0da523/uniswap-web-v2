@@ -23,7 +23,7 @@ if ('ethereum' in window) {
   ;(window.ethereum as any).autoRefreshOnNetworkChange = false
 }
 
-const GOOGLE_ANALYTICS_ID: string | undefined = process.env.VITE_REACT_APP_GOOGLE_ANALYTICS_ID
+const GOOGLE_ANALYTICS_ID: string | undefined = import.meta.env.VITE_REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize(GOOGLE_ANALYTICS_ID)
   ReactGA.set({

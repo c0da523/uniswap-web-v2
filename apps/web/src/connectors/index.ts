@@ -5,11 +5,11 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
-const NETWORK_URL = process.env.VITE_REACT_APP_NETWORK_URL
-const FORMATIC_KEY = process.env.VITE_REACT_APP_FORTMATIC_KEY
-const PORTIS_ID = process.env.VITE_REACT_APP_PORTIS_ID
+const NETWORK_URL = import.meta.env.VITE_REACT_APP_NETWORK_URL
+const FORMATIC_KEY = import.meta.env.VITE_REACT_APP_FORTMATIC_KEY
+const PORTIS_ID = import.meta.env.VITE_REACT_APP_PORTIS_ID
 
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.VITE_REACT_APP_CHAIN_ID ?? '1')
+export const NETWORK_CHAIN_ID: number = parseInt(import.meta.env.VITE_REACT_APP_CHAIN_ID ?? '1')
 
 if (typeof NETWORK_URL === 'undefined') {
   throw new Error(`VITE_REACT_APP_NETWORK_URL must be a defined environment variable`)
