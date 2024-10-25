@@ -12,11 +12,8 @@ import Transaction from './Transaction'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { getEtherscanLink } from '../../utils'
-import { injected, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
-import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
+import { injected, walletconnect } from '../../connectors'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
-import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
-import PortisIcon from '../../assets/images/portisIcon.png'
 import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
@@ -26,7 +23,7 @@ const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   padding: 1rem 1rem;
   font-weight: 500;
-  color: ${props => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
+  color: ${(props) => (props.color === 'blue' ? ({ theme }) => theme.primary1 : 'inherit')};
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding: 1rem;
   `};
@@ -223,7 +220,7 @@ export default function AccountDetails({
   pendingTransactions,
   confirmedTransactions,
   ENSName,
-  openOptions
+  openOptions,
 }: AccountDetailsProps) {
   const { chainId, account, connector } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
@@ -234,10 +231,10 @@ export default function AccountDetails({
     const isMetaMask = !!(ethereum && ethereum.isMetaMask)
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
-        k =>
-          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
+        (k) =>
+          SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK')),
       )
-      .map(k => SUPPORTED_WALLETS[k].name)[0]
+      .map((k) => SUPPORTED_WALLETS[k].name)[0]
     return <WalletName>Connected with {name}</WalletName>
   }
 
@@ -253,33 +250,6 @@ export default function AccountDetails({
         <IconWrapper size={16}>
           <img src={WalletConnectIcon} alt={'wallet connect logo'} />
         </IconWrapper>
-      )
-    } else if (connector === walletlink) {
-      return (
-        <IconWrapper size={16}>
-          <img src={CoinbaseWalletIcon} alt={'coinbase wallet logo'} />
-        </IconWrapper>
-      )
-    } else if (connector === fortmatic) {
-      return (
-        <IconWrapper size={16}>
-          <img src={FortmaticIcon} alt={'fortmatic logo'} />
-        </IconWrapper>
-      )
-    } else if (connector === portis) {
-      return (
-        <>
-          <IconWrapper size={16}>
-            <img src={PortisIcon} alt={'portis logo'} />
-            <MainWalletAction
-              onClick={() => {
-                portis.portis.showPortis()
-              }}
-            >
-              Show Portis
-            </MainWalletAction>
-          </IconWrapper>
-        </>
       )
     }
     return null

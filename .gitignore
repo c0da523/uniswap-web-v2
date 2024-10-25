@@ -36,4 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
-/.yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

@@ -1,7 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@repo/uniswap-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+import { fortmatic, injected, walletconnect } from '../connectors'
 
 // export const ROUTER_ADDRESS = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
 export const ROUTER_ADDRESS = '0x28a9EecAD435Fc74E608684211F58D1065a91147'
@@ -101,14 +101,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true,
   },
-  WALLET_LINK: {
-    connector: walletlink,
-    name: 'Coinbase Wallet',
-    iconName: 'coinbaseWalletIcon.svg',
-    description: 'Use Coinbase Wallet app on mobile device',
-    href: null,
-    color: '#315CF5',
-  },
+
   COINBASE_LINK: {
     name: 'Open in Coinbase Wallet',
     iconName: 'coinbaseWalletIcon.svg',
@@ -125,15 +118,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Login using Fortmatic hosted wallet',
     href: null,
     color: '#6748FF',
-    mobile: true,
-  },
-  Portis: {
-    connector: portis,
-    name: 'Portis',
-    iconName: 'portisIcon.png',
-    description: 'Login using Portis hosted wallet',
-    href: null,
-    color: '#4A6C9B',
     mobile: true,
   },
 }

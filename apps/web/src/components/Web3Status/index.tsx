@@ -9,7 +9,7 @@ import CoinbaseWalletIcon from '../../assets/images/coinbaseWalletIcon.svg'
 import FortmaticIcon from '../../assets/images/fortmaticIcon.png'
 import PortisIcon from '../../assets/images/portisIcon.png'
 import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
-import { fortmatic, injected, portis, walletconnect, walletlink } from '../../connectors'
+import { fortmatic, injected, walletconnect } from '../../connectors'
 import { NetworkContextName } from '../../constants'
 import useENSName from '../../hooks/useENSName'
 import { useHasSocks } from '../../hooks/useSocksBalance'
@@ -139,22 +139,10 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
         <img src={WalletConnectIcon} alt={''} />
       </IconWrapper>
     )
-  } else if (connector === walletlink) {
-    return (
-      <IconWrapper size={16}>
-        <img src={CoinbaseWalletIcon} alt={''} />
-      </IconWrapper>
-    )
   } else if (connector === fortmatic) {
     return (
       <IconWrapper size={16}>
         <img src={FortmaticIcon} alt={''} />
-      </IconWrapper>
-    )
-  } else if (connector === portis) {
-    return (
-      <IconWrapper size={16}>
-        <img src={PortisIcon} alt={''} />
       </IconWrapper>
     )
   }
@@ -174,7 +162,7 @@ function Web3StatusInner() {
     return txs.filter(isTransactionRecent).sort(newTransactionsFirst)
   }, [allTransactions])
 
-  const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
+  const pending = sortedRecentTransactions.filter((tx) => !tx.receipt).map((tx) => tx.hash)
 
   const hasPendingTransactions = !!pending.length
   const hasSocks = useHasSocks()
@@ -225,8 +213,8 @@ export default function Web3Status() {
     return txs.filter(isTransactionRecent).sort(newTransactionsFirst)
   }, [allTransactions])
 
-  const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
-  const confirmed = sortedRecentTransactions.filter(tx => tx.receipt).map(tx => tx.hash)
+  const pending = sortedRecentTransactions.filter((tx) => !tx.receipt).map((tx) => tx.hash)
+  const confirmed = sortedRecentTransactions.filter((tx) => tx.receipt).map((tx) => tx.hash)
 
   if (!contextNetwork.active && !active) {
     return null
