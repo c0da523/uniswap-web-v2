@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
+# Uniswap Interface
 
-## Getting Started
+[![Tests](https://github.com/Uniswap/uniswap-interface/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions?query=workflow%3ATests)
+[![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
-First, run the development server:
+An open source interface for Uniswap -- a protocol for decentralized exchange of Ethereum tokens.
+
+- Website: [uniswap.org](https://uniswap.org/)
+- Interface: [app.uniswap.org](https://app.uniswap.org)
+- Docs: [uniswap.org/docs/](https://uniswap.org/docs/)
+- Twitter: [@UniswapProtocol](https://twitter.com/UniswapProtocol)
+- Reddit: [/r/Uniswap](https://www.reddit.com/r/Uniswap/)
+- Email: [contact@uniswap.org](mailto:contact@uniswap.org)
+- Discord: [Uniswap](https://discord.gg/Y7TF6QA)
+- Whitepaper: [Link](https://hackmd.io/C-DvwDSfSxuh-Gd4WKE_ig)
+
+## Accessing the Uniswap Interface
+
+To access the Uniswap Interface, use an IPFS gateway link from the
+[latest release](https://github.com/Uniswap/uniswap-interface/releases/latest), 
+or visit [app.uniswap.org](https://app.uniswap.org).
+
+## Listing a token
+
+Please see the
+[@uniswap/default-token-list](https://github.com/uniswap/default-token-list) 
+repository.
+
+## Development
+
+### Install Dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
+### Configuring the environment (optional)
 
-## Learn More
+To have the interface default to a different network when a wallet is not connected:
 
-To learn more about Next.js, take a look at the following resources:
+1. Make a copy of `.env` named `.env.local`
+2. Change `REACT_APP_NETWORK_ID` to `"{YOUR_NETWORK_ID}"`
+3. Change `REACT_APP_NETWORK_URL` to e.g. `"https://{YOUR_NETWORK_ID}.infura.io/v3/{YOUR_INFURA_KEY}"` 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Note that the interface only works on testnets where both 
+[Uniswap V2](https://uniswap.org/docs/v2/smart-contracts/factory/) and 
+[multicall](https://github.com/makerdao/multicall) are deployed.
+The interface will not work on other networks.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributions
 
-## Deploy on Vercel
+**Please open all pull requests against the `master` branch.** 
+CI checks will run against all PRs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Accessing Uniswap Interface V1
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Uniswap Interface supports swapping against, and migrating or removing liquidity from Uniswap V1. However,
+if you would like to use Uniswap V1, the Uniswap V1 interface for mainnet and testnets is accessible via IPFS gateways 
+linked from the [v1.0.0 release](https://github.com/Uniswap/uniswap-interface/releases/tag/v1.0.0).
