@@ -16,7 +16,7 @@ const ZERO = JSBI.BigInt(0)
 export function useMintState(): AppState['mint'] {
   return useSelector<AppState, AppState['mint']>((state) => state.mint)
 }
-
+// 获取mint信息
 export function useDerivedMintInfo(
   currencyA: Currency | undefined,
   currencyB: Currency | undefined,
@@ -152,7 +152,6 @@ export function useDerivedMintInfo(
   if (currencyBAmount && currencyBalances?.[Field.CURRENCY_B]?.lessThan(currencyBAmount)) {
     error = 'Insufficient ' + currencies[Field.CURRENCY_B]?.symbol + ' balance'
   }
-
   return {
     dependentField,
     currencies,

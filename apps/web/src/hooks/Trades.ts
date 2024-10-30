@@ -8,9 +8,18 @@ import { wrappedCurrency } from '../utils/wrappedCurrency'
 
 import { useActiveWeb3React } from './index'
 
+/**
+ * 拿到所有的交易token
+ * @param currencyA
+ * @param currencyB
+ * @returns
+ */
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const { chainId } = useActiveWeb3React()
 
+  // 默认的中转token
+  // 主网有 WETH, DAI, USDC, USDT, COMP, MKR, WBTC
+  // 测试网 只有 WETH
   const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
 
   const [tokenA, tokenB] = chainId
@@ -94,13 +103,17 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 }
 
 /**
+ * 输出数量确定，计算并返回输入数量，以及最优的路径
  * Returns the best trade for the token in to the exact amount of token out
  */
 export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: CurrencyAmount): Trade | null {
+  // 所有可用的交易对
   const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency)
 
   return useMemo(() => {
     if (currencyIn && currencyAmountOut && allowedPairs.length > 0) {
+      // todo 这里逻辑有优化空间，核心思路就是针对hops跳跃次数，看每增加1次跳跃，输入amount是否比bestTradeSoFar要少
+      // 详见v3.2.7版本的实现
       return (
         Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, { maxHops: 3, maxNumResults: 1 })[0] ??
         null

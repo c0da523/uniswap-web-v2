@@ -49,6 +49,7 @@ export function useApproveCallback(
   const addTransaction = useTransactionAdder()
 
   const approve = useCallback(async (): Promise<void> => {
+    debugger
     if (approvalState !== ApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily')
       return
@@ -73,15 +74,31 @@ export function useApproveCallback(
       return
     }
 
-    let useExact = false
-    const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
-      // general fallback for tokens who restrict approval amounts
-      useExact = true
-      return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
-    })
-
+    // 使让用户用maxUint256来approve
+    // let useExact = false
+    // const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
+    //   // general fallback for tokens who restrict approval amounts
+    //   useExact = true
+    //   return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
+    // })
+    // debugger
+    // return tokenContract
+    //   .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+    //     gasLimit: calculateGasMargin(estimatedGas),
+    //   })
+    //   .then((response: TransactionResponse) => {
+    //     addTransaction(response, {
+    //       summary: 'Approve ' + amountToApprove.currency.symbol,
+    //       approval: { tokenAddress: token.address, spender: spender },
+    //     })
+    //   })
+    //   .catch((error: Error) => {
+    //     console.debug('Failed to approve token', error)
+    //     throw error
+    //   })
+    const estimatedGas = await tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
     return tokenContract
-      .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+      .approve(spender, amountToApprove.raw.toString(), {
         gasLimit: calculateGasMargin(estimatedGas),
       })
       .then((response: TransactionResponse) => {
@@ -89,10 +106,6 @@ export function useApproveCallback(
           summary: 'Approve ' + amountToApprove.currency.symbol,
           approval: { tokenAddress: token.address, spender: spender },
         })
-      })
-      .catch((error: Error) => {
-        console.debug('Failed to approve token', error)
-        throw error
       })
   }, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction])
 

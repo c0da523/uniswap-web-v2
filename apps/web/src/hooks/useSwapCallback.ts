@@ -37,6 +37,7 @@ interface FailedCall {
 type EstimatedSwapCall = SuccessfulCall | FailedCall
 
 /**
+ * 返回swap交易需要的参数
  * Returns the swap calls that can be used to make the trade
  * @param trade trade to execute
  * @param allowedSlippage user allowed slippage
@@ -55,6 +56,7 @@ function useSwapCallArguments(
   const recipient = recipientAddressOrName === null ? account : recipientAddress
 
   const v1Exchange = useV1ExchangeContract(useV1TradeExchangeAddress(trade), true)
+  debugger
 
   return useMemo(() => {
     const tradeVersion = getTradeVersion(trade)
@@ -104,8 +106,16 @@ function useSwapCallArguments(
   }, [account, allowedSlippage, chainId, deadline, library, recipient, trade, v1Exchange])
 }
 
-// returns a function that will execute a swap, if the parameters are all valid
-// and the user has approved the slippage adjusted input amount for the trade
+/**
+ * returns a function that will execute a swap, if the parameters are all valid
+ * and the user has approved the slippage adjusted input amount for the trade
+ *
+ * @param trade
+ * @param allowedSlippage
+ * @param deadline
+ * @param recipientAddressOrName
+ * @returns
+ */
 export function useSwapCallback(
   trade: Trade | undefined, // trade to execute, required
   allowedSlippage: number = INITIAL_ALLOWED_SLIPPAGE, // in bips

@@ -19,6 +19,7 @@ export enum PairState {
 export function usePairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
   const { chainId } = useActiveWeb3React()
 
+  // 转化成erc20 tokens
   const tokens = useMemo(
     () =>
       currencies.map(([currencyA, currencyB]) => [

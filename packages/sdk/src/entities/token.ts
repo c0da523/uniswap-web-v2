@@ -64,5 +64,5 @@ export const WETH = {
     'WETH',
     'Wrapped Ether',
   ),
-  [ChainId.TZKJ]: new Token(ChainId.TZKJ, '0x667C8e555B18F598953FCA07857322ef7e8ED31c', 18, 'WZKJ', 'Wrapped ZKJ'),
+  [ChainId.TZKJ]: new Token(ChainId.TZKJ, '0xF8f53990624C3841449A1B700259c2e45D430390', 18, 'WZKJ', 'Wrapped ZKJ'),
 }
