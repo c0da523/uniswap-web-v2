@@ -2,17 +2,10 @@
   "name": "info",
   "private": true,
   "homepage": "https://info.uniswap.org",
-  "devDependencies": {
+  "dependencies": {
     "@popperjs/core": "^2.4.2",
     "@reach/portal": "^0.10.3",
     "@reach/router": "^1.2.1",
-    "@types/jest": "^26.0.0",
-    "@types/node": "^16.x",
-    "@types/react": "^16.9.36",
-    "@types/react-dom": "^16.9.8",
-    "@types/styled-components": "^5.1.0",
-    "@typescript-eslint/eslint-plugin": "^4.4.0",
-    "@typescript-eslint/parser": "^4.4.0",
     "@uniswap/token-lists": "^1.0.0-beta.15",
     "ajv": "^6.12.4",
     "animated-number-react": "^0.1.1",
@@ -25,11 +18,6 @@
     "dayjs": "^1.8.16",
     "decimal.js-light": "^2.5.0",
     "es-abstract": "^1.14.2",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.3",
-    "eslint-plugin-react-hooks": "^4.1.2",
     "ethers": "^4.0.39",
     "export-to-csv": "^0.2.1",
     "feather-icons": "^4.24.1",
@@ -40,7 +28,6 @@
     "node-vibrant": "^3.1.5",
     "numeral": "^2.0.6",
     "polished": "^3.4.4",
-    "prettier": "*",
     "react": "^16.9.0",
     "react-apollo": "^3.1.1",
     "react-device-detect": "^1.9.10",
@@ -52,7 +39,6 @@
     "react-popper": "^2.2.3",
     "react-resize-observer": "^1.1.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.1.1",
     "react-scroll": "^1.8.0",
     "react-scroll-parallax": "^2.2.0",
     "react-select": "^3.0.7",
@@ -67,11 +53,27 @@
     "toformat": "^2.0.0",
     "typeface-inter": "^3.10.0",
     "unstated": "^2.1.1",
-    "wcag-contrast": "^3.0.0",
+    "wcag-contrast": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/node": "^16.x",
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.0",
+    "@typescript-eslint/parser": "^4.4.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "prettier": "*",
     "typescript": "*",
     "vite": "^4.3.9",
     "vite-plugin-static-copy": "^2.0.0",
-    "vite-plugin-svgr": "^4.2.0"
+    "vite-plugin-svgr": "^4.2.0",
+    "react-scripts": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -91,8 +93,5 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-3.0-or-later",
-  "dependencies": {
-    "react-helmet": "^6.1.0"
-  }
+  "license": "GPL-3.0-or-later"
 }
