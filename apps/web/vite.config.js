@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
   plugins: [
@@ -8,6 +9,14 @@ export default defineConfig({
     svgr({
       include: '**/*.svg',
       exclude: '**/*.svg?url',
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/images',
+          dest: 'assets/images',
+        },
+      ],
     }),
   ],
   server: {

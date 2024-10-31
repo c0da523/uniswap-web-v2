@@ -5,6 +5,7 @@
   "description": "Uniswap Interface",
   "homepage": ".",
   "license": "GPL-3.0-or-later",
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "build:testing": "vite build --mode testing",
@@ -102,6 +103,7 @@
     "start-server-and-test": "^1.11.0",
     "typescript": "^3.8.3",
     "vite": "^4.3.9",
+    "vite-plugin-static-copy": "^2.0.0",
     "vite-plugin-svgr": "^4.2.0"
   }
 }
