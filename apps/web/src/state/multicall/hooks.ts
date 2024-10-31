@@ -160,6 +160,15 @@ function toCallState(
   }
 }
 
+/**
+ * 单个合约，调用多次相同的方法，但是参数不同
+ * eg. 查询多个用户在同一个 ERC20 代币中的余额。
+ * @param contract
+ * @param methodName
+ * @param callInputs
+ * @param options
+ * @returns
+ */
 export function useSingleContractMultipleData(
   contract: Contract | null | undefined,
   methodName: string,
@@ -191,7 +200,8 @@ export function useSingleContractMultipleData(
 }
 
 /**
- *
+ * 一次调用多个合约，调用相同的方法。
+ * eg. 同时调用多个 ERC20 合约，余额查询
  * @param addresses 多个合约地址
  * @param contractInterface 合约接口（ABI）
  * @param methodName 要调用的方法名
@@ -239,6 +249,14 @@ export function useMultipleContractSingleData(
   }, [fragment, results, contractInterface, latestBlockNumber])
 }
 
+/**
+ * 调用一个合约，一次方法，一个参数
+ * @param contract
+ * @param methodName
+ * @param inputs
+ * @param options
+ * @returns
+ */
 export function useSingleCallResult(
   contract: Contract | null | undefined,
   methodName: string,

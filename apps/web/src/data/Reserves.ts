@@ -37,6 +37,7 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
     [tokens],
   )
 
+  // 同时调用多个pair合约，查询储备金
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
 
   return useMemo(() => {

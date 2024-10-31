@@ -15,34 +15,34 @@ export interface SwapState {
 }
 
 const initialState: SwapState = {
-  independentField: Field.INPUT,
-  typedValue: '',
+  independentField: Field.INPUT, // 用户在哪个field进行输入的；
+  typedValue: '', // 输入的value
   [Field.INPUT]: {
-    currencyId: ''
+    currencyId: '', // input的币种 合约address
   },
   [Field.OUTPUT]: {
-    currencyId: ''
+    currencyId: '', // output的币种
   },
-  recipient: null
+  recipient: null,
 }
 
-export default createReducer<SwapState>(initialState, builder =>
+export default createReducer<SwapState>(initialState, (builder) =>
   builder
     .addCase(
       replaceSwapState,
       (state, { payload: { typedValue, recipient, field, inputCurrencyId, outputCurrencyId } }) => {
         return {
           [Field.INPUT]: {
-            currencyId: inputCurrencyId
+            currencyId: inputCurrencyId,
           },
           [Field.OUTPUT]: {
-            currencyId: outputCurrencyId
+            currencyId: outputCurrencyId,
           },
           independentField: field,
           typedValue: typedValue,
-          recipient
+          recipient,
         }
-      }
+      },
     )
     .addCase(selectCurrency, (state, { payload: { currencyId, field } }) => {
       const otherField = field === Field.INPUT ? Field.OUTPUT : Field.INPUT
@@ -52,32 +52,32 @@ export default createReducer<SwapState>(initialState, builder =>
           ...state,
           independentField: state.independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT,
           [field]: { currencyId: currencyId },
-          [otherField]: { currencyId: state[field].currencyId }
+          [otherField]: { currencyId: state[field].currencyId },
         }
       } else {
         // the normal case
         return {
           ...state,
-          [field]: { currencyId: currencyId }
+          [field]: { currencyId: currencyId },
         }
       }
     })
-    .addCase(switchCurrencies, state => {
+    .addCase(switchCurrencies, (state) => {
       return {
         ...state,
         independentField: state.independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT,
         [Field.INPUT]: { currencyId: state[Field.OUTPUT].currencyId },
-        [Field.OUTPUT]: { currencyId: state[Field.INPUT].currencyId }
+        [Field.OUTPUT]: { currencyId: state[Field.INPUT].currencyId },
       }
     })
     .addCase(typeInput, (state, { payload: { field, typedValue } }) => {
       return {
         ...state,
         independentField: field,
-        typedValue
+        typedValue,
       }
     })
     .addCase(setRecipient, (state, { payload: { recipient } }) => {
       state.recipient = recipient
-    })
+    }),
 )

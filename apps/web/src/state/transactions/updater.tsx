@@ -7,21 +7,24 @@ import { checkedTransaction, finalizeTransaction } from './actions'
 
 export function shouldCheck(
   lastBlockNumber: number,
-  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number }
+  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number },
 ): boolean {
   if (tx.receipt) return false
   if (!tx.lastCheckedBlockNumber) return true
   const blocksSinceCheck = lastBlockNumber - tx.lastCheckedBlockNumber
   if (blocksSinceCheck < 1) return false
   const minutesPending = (new Date().getTime() - tx.addedTime) / 1000 / 60
+  // 如果交易pending超过了60min，等9个block的时间检查一次，避免频繁检查
   if (minutesPending > 60) {
     // every 10 blocks if pending for longer than an hour
     return blocksSinceCheck > 9
   } else if (minutesPending > 5) {
+    // 如果交易pending超过5min，等2个block的时间检查一次，避免频繁检查
     // every 3 blocks if pending more than 5 minutes
     return blocksSinceCheck > 2
   } else {
     // otherwise every block
+    // 每一个block都检查一次
     return true
   }
 }
@@ -32,9 +35,9 @@ export default function Updater(): null {
   const lastBlockNumber = useBlockNumber()
 
   const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector<AppState, AppState['transactions']>(state => state.transactions)
+  const state = useSelector<AppState, AppState['transactions']>((state) => state.transactions)
 
-  const transactions = chainId ? state[chainId] ?? {} : {}
+  const transactions = chainId ? (state[chainId] ?? {}) : {}
 
   // show popup on confirm
   const addPopup = useAddPopup()
@@ -43,11 +46,11 @@ export default function Updater(): null {
     if (!chainId || !library || !lastBlockNumber) return
 
     Object.keys(transactions)
-      .filter(hash => shouldCheck(lastBlockNumber, transactions[hash]))
-      .forEach(hash => {
+      .filter((hash) => shouldCheck(lastBlockNumber, transactions[hash]))
+      .forEach((hash) => {
         library
           .getTransactionReceipt(hash)
-          .then(receipt => {
+          .then((receipt) => {
             if (receipt) {
               dispatch(
                 finalizeTransaction({
@@ -61,9 +64,9 @@ export default function Updater(): null {
                     status: receipt.status,
                     to: receipt.to,
                     transactionHash: receipt.transactionHash,
-                    transactionIndex: receipt.transactionIndex
-                  }
-                })
+                    transactionIndex: receipt.transactionIndex,
+                  },
+                }),
               )
 
               addPopup(
@@ -71,16 +74,16 @@ export default function Updater(): null {
                   txn: {
                     hash,
                     success: receipt.status === 1,
-                    summary: transactions[hash]?.summary
-                  }
+                    summary: transactions[hash]?.summary,
+                  },
                 },
-                hash
+                hash,
               )
             } else {
               dispatch(checkedTransaction({ chainId, hash, blockNumber: lastBlockNumber }))
             }
           })
-          .catch(error => {
+          .catch((error) => {
             console.error(`failed to check transaction hash: ${hash}`, error)
           })
       })

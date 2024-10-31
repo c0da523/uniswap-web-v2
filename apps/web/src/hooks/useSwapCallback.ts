@@ -56,7 +56,6 @@ function useSwapCallArguments(
   const recipient = recipientAddressOrName === null ? account : recipientAddress
 
   const v1Exchange = useV1ExchangeContract(useV1TradeExchangeAddress(trade), true)
-  debugger
 
   return useMemo(() => {
     const tradeVersion = getTradeVersion(trade)

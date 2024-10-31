@@ -48,9 +48,13 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
       : defaultValue
 }
 
-// undefined if invalid or does not exist
-// null if loading
-// otherwise returns the token
+/**
+ * 查询token是否存在
+ * @param tokenAddress 
+ * @returns undefined if invalid or does not exist
+            null if loading
+            otherwise returns the token
+ */
 export function useToken(tokenAddress?: string): Token | undefined | null {
   const { chainId } = useActiveWeb3React()
   const tokens = useAllTokens()

@@ -1,4 +1,3 @@
-import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Trade, TokenAmount, CurrencyAmount, ETHER } from '@repo/uniswap-sdk'
 import { useCallback, useMemo } from 'react'
@@ -32,16 +31,22 @@ export function useApproveCallback(
 
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
+    // 1. 基础检查：如果没有金额或接收方地址，返回未知状态
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
+
+    // 2. 如果是原生代币（ETH），直接返回已授权
     if (amountToApprove.currency === ETHER) return ApprovalState.APPROVED
+
     // we might not have enough data to know whether or not we need to approve
+    // 3. 如果还没有获取到当前的授权额度，返回未知状态
     if (!currentAllowance) return ApprovalState.UNKNOWN
 
     // amountToApprove will be defined if currentAllowance is
+    // 4. 比较当前授权额度和需要授权的金额
     return currentAllowance.lessThan(amountToApprove)
       ? pendingApproval
-        ? ApprovalState.PENDING
-        : ApprovalState.NOT_APPROVED
+        ? ApprovalState.PENDING // 如果有正在等待授权交易确认，返回等待中
+        : ApprovalState.NOT_APPROVED // 否则返回未授权
       : ApprovalState.APPROVED
   }, [amountToApprove, currentAllowance, pendingApproval, spender])
 
@@ -49,7 +54,6 @@ export function useApproveCallback(
   const addTransaction = useTransactionAdder()
 
   const approve = useCallback(async (): Promise<void> => {
-    debugger
     if (approvalState !== ApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily')
       return

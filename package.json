@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "uniswap-v2-turborepo",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -13,7 +13,8 @@
     "typescript": "5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "yarn": "3.2.3"
   },
   "packageManager": "yarn@3.2.3",
   "workspaces": [
