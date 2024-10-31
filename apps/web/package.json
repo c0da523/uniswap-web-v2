@@ -7,6 +7,7 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "vite build",
+    "build:testing": "vite build --mode testing",
     "integration-test": "start-server-and-test 'serve build -l 3000' http://localhost:3000 'cypress run'",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "start": "vite",

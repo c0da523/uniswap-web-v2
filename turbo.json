@@ -13,6 +13,10 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "build:testing": {
+      "dependsOn": ["^build:testing"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"]
     }
   }
 }
