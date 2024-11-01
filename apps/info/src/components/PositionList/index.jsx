@@ -6,7 +6,7 @@ import utc from 'dayjs/plugin/utc'
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'
 import Link, { CustomLink } from '../Link'
-import { Divider } from '../../components'
+import { Divider } from '..'
 import DoubleTokenLogo from '../DoubleLogo'
 import { withRouter } from 'react-router-dom'
 import { formattedNum, getPoolLink } from '../../utils'
@@ -214,10 +214,10 @@ function PositionList({ positions }) {
                   <TYPE.small fontWeight={400}>
                     {parseFloat(position.pair.token0.derivedETH)
                       ? formattedNum(
-                          position?.fees.sum / (parseFloat(position.pair.token0.derivedETH) * ethPrice) / 2,
-                          false,
-                          true
-                        )
+                        position?.fees.sum / (parseFloat(position.pair.token0.derivedETH) * ethPrice) / 2,
+                        false,
+                        true
+                      )
                       : 0}{' '}
                   </TYPE.small>
                   <FormattedName
@@ -231,10 +231,10 @@ function PositionList({ positions }) {
                   <TYPE.small fontWeight={400}>
                     {parseFloat(position.pair.token1.derivedETH)
                       ? formattedNum(
-                          position?.fees.sum / (parseFloat(position.pair.token1.derivedETH) * ethPrice) / 2,
-                          false,
-                          true
-                        )
+                        position?.fees.sum / (parseFloat(position.pair.token1.derivedETH) * ethPrice) / 2,
+                        false,
+                        true
+                      )
                       : 0}{' '}
                   </TYPE.small>
                   <FormattedName

@@ -18,26 +18,5 @@
     "types": ["react-spring", "jest"]
   },
   "exclude": ["node_modules", "cypress"],
-  "include": [
-    "**/*.js",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/components/analytics/GoogleAnalyticsReporter.jsx",
-    "src/App.jsx",
-    "src/index.jsx",
-    "src/components/SideNav/index.jsx",
-    "src/components/Row/index.jsx",
-    "src/components/Search/index.jsx",
-    "src/components/Select/index.jsx",
-    "src/components/Select/popout.jsx",
-    "src/components/Title/index.jsx",
-    "src/components/TokenChart/index.jsx",
-    "src/components/TokenList/index.jsx",
-    "src/components/TokenLogo/index.jsx",
-    "src/components/TradingviewChart/index.jsx",
-    "src/components/TxnList/index.jsx",
-    "src/components/UniPrice/index.jsx",
-    "src/components/UserChart/index.jsx",
-    "src/components/Warning/index.jsx"
-  ]
+  "include": ["**/*.{js,jsx}", "**/*.{ts,tsx}"]
 }
