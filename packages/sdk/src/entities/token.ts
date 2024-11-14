@@ -65,4 +65,11 @@ export const WETH = {
     'Wrapped Ether',
   ),
   [ChainId.TZKJ]: new Token(ChainId.TZKJ, '0xF8f53990624C3841449A1B700259c2e45D430390', 18, 'WZKJ', 'Wrapped ZKJ'),
+  [ChainId.SEPOLIA]: new Token(
+    ChainId.SEPOLIA,
+    '0xe43116735da929d6aa66705f6f9a08d6722755e1',
+    18,
+    'WETH',
+    'Wrapped ETH',
+  ),
 }

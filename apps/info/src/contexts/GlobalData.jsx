@@ -43,7 +43,7 @@ const offsetVolumes = [
 dayjs.extend(utc)
 dayjs.extend(weekOfYear)
 
-const GlobalDataContext = createContext()
+const GlobalDataContext = createContext([])
 
 function useGlobalDataContext() {
   return useContext(GlobalDataContext)
@@ -708,7 +708,7 @@ export function useTopLps() {
             if (results) {
               return results.liquidityPositions
             }
-          } catch (e) {}
+          } catch (e) { }
         })
       )
 
